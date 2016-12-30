@@ -15,5 +15,4 @@ class BATTLETANK2_API ABattleTank2GameMode : public AGameMode
 	
 	
 	
-	
 };
