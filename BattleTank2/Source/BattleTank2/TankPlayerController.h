@@ -14,7 +14,7 @@ class BATTLETANK2_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
-public:
+private:
     virtual void BeginPlay() override;
     
     // Called every frame
@@ -22,7 +22,12 @@ public:
     
     ATank* GetControlledTank() const;
 
-private:
+    UPROPERTY(EditAnywhere);
+    float CrosshairXLocation = 0.5f;
+
+    UPROPERTY(EditAnywhere);
+    float CrosshairYLocation = 0.33333f;
+    
     // start the tank moving the barrel so a shot will hit where crosshair aims
     void AimAtCrosshair();
     
