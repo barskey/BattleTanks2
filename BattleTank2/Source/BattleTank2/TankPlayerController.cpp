@@ -36,8 +36,7 @@ void ATankPlayerController::AimAtCrosshair()
     FVector HitLocation; // out parameter
     if (GetSightRayHitLocation(HitLocation))
     {
-        UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *HitLocation.ToString());
-        // TODO tell controlled tank to aim at this point
+        GetControlledTank()->AimAt(HitLocation);
     }
 }
 
