@@ -21,6 +21,7 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
     void LaunchProjectile(float Speed);
+    
 protected:
     UProjectileMovementComponent* ProjectileMovement = nullptr;
 
