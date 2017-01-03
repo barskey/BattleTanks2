@@ -3,8 +3,8 @@
 #include "BattleTank2.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 
 // Sets default values
 ATank::ATank()
@@ -47,14 +47,12 @@ void ATank::AimAt(FVector HitLocation)
 
 void ATank::Fire()
 {
-    UE_LOG(LogTemp, Warning, TEXT("FIRE!"))
+    if (!Barrel) { return; }
     
-    if (!Barrel) {
-        UE_LOG(LogTemp, Error, TEXT("Barrel local reference not set in Tank.cpp"))
-        return;
-    }
     // spawn a projectile at the socket location on the barrel
     auto Location = Barrel->GetSocketLocation(FName("ProjectileStart"));
     auto Rotation = Barrel->GetSocketRotation(FName("ProjectileStart"));
-    GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Location, Rotation);
+    auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Location, Rotation);
+    
+    Projectile->LaunchProjectile(LaunchSpeed);
 }
