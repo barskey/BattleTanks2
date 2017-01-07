@@ -20,12 +20,6 @@ class BATTLETANK2_API ATank : public APawn
 public:
     void AimAt(FVector HitLocation);
     
-    UFUNCTION(BlueprintCallable, Category="Setup")
-    void SetBarrelReference(UTankBarrel* BarrelToSet);
-    
-    UFUNCTION(BlueprintCallable, Category="Setup")
-    void SetTurretReference(UTankTurret* TurretToSet);
-
     UFUNCTION(BlueprintCallable, Category="Firing")
     void Fire();
 
@@ -40,11 +34,11 @@ private:
 	// Sets default values for this pawn's properties
 	ATank();
 
+    UTankBarrel* Barrel = nullptr;
+    UTankTurret* Turret = nullptr;
+
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
-    
-    // Called to bind functionality to input
-    virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
     
     UPROPERTY(EditDefaultsOnly, Category="Setup")
     TSubclassOf<AProjectile> ProjectileBlueprint;
@@ -54,9 +48,6 @@ private:
     
     UPROPERTY(EditDefaultsOnly, Category="Firing")
     float ReloadTimeinSec = 3;
-    
-    // local barrel reference for spawning projectiles
-    UTankBarrel* Barrel = nullptr;
     
     double LastFireTime = 0;
 
