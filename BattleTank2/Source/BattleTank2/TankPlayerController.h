@@ -15,14 +15,16 @@ class BATTLETANK2_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+protected:
+    UFUNCTION(BlueprintCallable, Category="Setup")
+    ATank* GetControlledTank() const;
+    
 private:
     virtual void BeginPlay() override;
     
     // Called every frame
     virtual void Tick( float DeltaSeconds ) override;
     
-    ATank* GetControlledTank() const;
-
     UPROPERTY(EditDefaultsOnly)
     float CrosshairXLocation = 0.5;
 
