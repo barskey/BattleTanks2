@@ -6,7 +6,6 @@
 #include "Tank.generated.h" // must be last
 
 // forward declarations
-class UTankAimingComponent;
 class UTankBarrel;
 class UTankTurret;
 class AProjectile;
@@ -17,14 +16,8 @@ class BATTLETANK2_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-    void AimAt(FVector HitLocation);
-    
     UFUNCTION(BlueprintCallable, Category="Firing")
     void Fire();
-
-protected:
-    UPROPERTY(BlueprintReadOnly)
-    UTankAimingComponent* TankAimingComponent = nullptr;
     
 private:
 	// Sets default values for this pawn's properties
@@ -39,6 +32,7 @@ private:
     UPROPERTY(EditDefaultsOnly, Category="Setup")
     TSubclassOf<AProjectile> ProjectileBlueprint;
 
+    // TODO keep copy in the Tank until refactored out
     UPROPERTY(EditDefaultsOnly, Category="Firing")
     float LaunchSpeed = 100000; // TODO figure out reasonable starting value
     
