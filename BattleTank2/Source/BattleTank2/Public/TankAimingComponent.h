@@ -56,8 +56,12 @@ private:
     UPROPERTY(EditDefaultsOnly, Category="Firing")
     float LaunchSpeed = 100000; // TODO figure out reasonable starting value
     
+    FVector AimDirection;
+    
     void MoveTowards(FVector AimDirection);
     
     UPROPERTY(EditDefaultsOnly, Category="Setup")
     TSubclassOf<AProjectile> ProjectileBlueprint;
+    
+    bool IsBarrelMoving();
 };
