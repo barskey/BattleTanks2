@@ -17,6 +17,20 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::BeginPlay()
+{
+    Super::BeginPlay();
+    
+    LastFireTime = FPlatformTime::Seconds();
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
+{
+    if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeinSec) {
+        FiringState = EFiringState::Reloading;
+    }
+}
+
 void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
     Barrel = BarrelToSet;
@@ -65,11 +79,9 @@ void UTankAimingComponent::Fire()
 {
     if (!Barrel || !ProjectileBlueprint) { return; }
     
-    bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeinSec;
-    if (isReloaded) {
+        if (FiringState != EFiringState::Reloading) {
         // spawn a projectile at the socket location on the barrel
         auto Location = Barrel->GetSocketLocation(FName("ProjectileStart"));
-        UE_LOG(LogTemp, Warning, TEXT("Location: %s"), *Location.ToString())
         auto Rotation = Barrel->GetSocketRotation(FName("ProjectileStart"));
         auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Location, Rotation);
         
