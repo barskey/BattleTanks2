@@ -67,7 +67,7 @@ private:
 
     FVector AimDirection;
     
-    void MoveTowards(FVector AimDirection);
+    void MoveTowards(FVector AimVector);
     
     UPROPERTY(EditDefaultsOnly, Category="Setup")
     TSubclassOf<AProjectile> ProjectileBlueprint;

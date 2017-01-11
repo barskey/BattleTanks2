@@ -16,4 +16,13 @@ private:
 
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
+    
+    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+    
+    UPROPERTY(EditDefaultsOnly, Category="Setup")
+    int32 MaxHealth = 200;
+    
+private:
+    UPROPERTY(VisibleAnywhere, Category="Setup")
+    int32 CurrentHealth = 0;
 };
