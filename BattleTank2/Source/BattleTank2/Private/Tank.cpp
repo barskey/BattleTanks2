@@ -14,8 +14,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP BeginPlay to run!
-    
-    CurrentHealth = MaxHealth;
 }
 
 float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
@@ -26,4 +24,9 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEve
     UE_LOG(LogTemp, Warning, TEXT("HIT! Damage Amount: %i, New Current Health: %i"), DamageToApply, CurrentHealth)
 
     return DamageToApply;
+}
+
+float ATank::GetHealthPercent() const
+{
+    return (float)CurrentHealth / (float)MaxHealth;
 }

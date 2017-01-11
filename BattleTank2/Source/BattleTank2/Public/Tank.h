@@ -17,12 +17,16 @@ private:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
     
-    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
-    
     UPROPERTY(EditDefaultsOnly, Category="Setup")
     int32 MaxHealth = 200;
     
-private:
     UPROPERTY(VisibleAnywhere, Category="Setup")
-    int32 CurrentHealth = 0;
+    int32 CurrentHealth = MaxHealth;
+
+public:
+    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+    
+    // Returns current health as a percent of starting health, between 0 and 1
+    UFUNCTION(BlueprintPure, Category="Health")
+    float GetHealthPercent() const;
 };
