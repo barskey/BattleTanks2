@@ -26,6 +26,8 @@ private:
     // Called every frame
     virtual void Tick( float DeltaSeconds ) override;
     
+    virtual void SetPawn(APawn* InPawn) override;
+
     UPROPERTY(EditDefaultsOnly)
     float CrosshairXLocation = 0.5;
 
@@ -45,4 +47,7 @@ private:
     
     // returns an OUT parameter, true if it hits something
     bool GetLookDirectionHitLocation( FVector LookDirection, FVector& HitLocation ) const;
+    
+    UFUNCTION()
+    void OnPossessedTankDeath();
 };
